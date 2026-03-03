@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://reqres.in",  
   "eslintConfig": {
     "extends": [
       "react-app",

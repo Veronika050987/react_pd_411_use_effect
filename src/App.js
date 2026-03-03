@@ -7,30 +7,28 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     const fetchUsers = async () => {
-      const payload = {
-        "project_slug": "<project_slug>",
-        "project_id": "<project_id>",
-        "source_type": "collection",
-        "source_id": "<collection_slug>",
-        "event": "record.created",
-        "action_type": "webhook",
-        "action_config": {
-          "url": "https://example.com/webhook"
+      try {
+        // Запрос идет на /api/users. Прокси перенаправит его на https://reqres.in/api/users
+        const response = await fetch('/api/users?page=1'); // ИЗМЕНЕНО: Убрали домен
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-      };
+        
+        const json = await response.json(); 
+        
+        // reqres.in возвращает объект с data: [...]
+        setUsers(json.data); 
 
-      const response = await fetch('https://reqres.in/api/users', {
-        method: 'POST',
-        headers: {
-          'x-api-key': 'reqres_771a052959ff4a37acad6940d563f96c',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const json = await response.json();
-      setUsers(json);
+      } catch (e) {
+        console.error("Ошибка загрузки (возможно, сетевая/CORS):", e);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchUsers();
@@ -40,7 +38,7 @@ function App() {
     <div className='main'>
       {/* <Counter /> */}
       {/* <Text /> */}
-      <Users users={users} />
+      {loading ? <p>Загрузка пользователей...</p> : <Users users={users} />}
     </div>
   );
 }
