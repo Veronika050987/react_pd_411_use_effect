@@ -13,7 +13,7 @@ function App() {
     const fetchUsers = async () => {
       try {
         // Запрос идет на /api/users. Прокси перенаправит его на https://reqres.in/api/users
-        const response = await fetch('/api/users?page=1'); // ИЗМЕНЕНО: Убрали домен
+        const response = await fetch('api/users?page=2'); // ИЗМЕНЕНО: Убрали домен
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
