@@ -1,0 +1,12 @@
+.success-block
+{
+    text-align: center;
+    color:#8B008B;
+    font-size: 20px;
+}
+.success-block h3
+{
+    color:#32CD32;
+    font-size: 35px;
+    margin-bottom: 20px;
+}

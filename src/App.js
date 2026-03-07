@@ -4,11 +4,13 @@ import {Counter} from './components/Counter';
 import {Text} from './components/Text';
 import Users from './components/Users';
 import { useState, useEffect } from 'react';
+import Success from './components/Success';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [invites,setInvites] = useState([]);
+  const [success,setSuccess] = useState(false);
   
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,16 +35,24 @@ function App() {
     if(invites.includes(id))setInvites(prev => prev.filter(ch => ch !== id));
     else setInvites(prev => [...prev, id]);
   }
+  const onClickSendInvites = () =>
+  {
+    setSuccess(true);
+  }
 
   return (
     <div className='main'>
       {/* <Counter /> */}
       {/* <Text /> */}
+      {
+      success ? <Success count={invites.length}/> :
       <Users 
           users={users} 
           searchValue={searchValue} onChangeValue={onChangeValue} 
           invites={invites} onClickInvite={onClickInvite}
+          onClickSendInvites={onClickSendInvites}
       />
+  }
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import './Users.css';
 import User from './User.js';
 
-function Users({users, searchValue, onChangeValue, invites, onClickInvite})
+function Users({users, searchValue, onChangeValue, invites, onClickInvite,onClickSendInvites})
 {
     return(
         <>
@@ -35,7 +35,11 @@ function Users({users, searchValue, onChangeValue, invites, onClickInvite})
                     }
                 </ul>
             </div>
-            <button className='send-invite-btn'>Пригласить</button>
+            {
+               invites.length > 0 && <button className='send-invite-btn'onClick={onClickSendInvites}>
+                Пригласить
+                </button>
+            }
         </>
     )
 }
