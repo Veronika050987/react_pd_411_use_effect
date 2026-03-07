@@ -7,40 +7,43 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState('');
+  const [invites,setInvites] = useState([]);
   
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        // Запрос идет на /api/users. Прокси перенаправит его на https://reqres.in/api/users
-        const response = await fetch('api/users?page=2'); // ИЗМЕНЕНО: Убрали домен
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const json = await response.json(); 
-        
-        // reqres.in возвращает объект с data: [...]
-        setUsers(json.data); 
-
-      } catch (e) {
-        console.error("Ошибка загрузки (возможно, сетевая/CORS):", e);
-      } finally {
-        setLoading(false);
-      }
+        const response =  await fetch('https://reqres.in/api/users', {
+        // method: 'POST',
+        headers: {
+          'x-api-key': 'reqres_771a052959ff4a37acad6940d563f96c',
+          'Content-Type': 'application/json',
+        }//,
+        // body: JSON.stringify(payload),
+      }).then(res => res.json()).then(json => {setUsers(json.data)});
     };
-
     fetchUsers();
   }, []);
+
+  const onChangeValue = (event) =>
+  {
+    setSearchValue(event.target.value);
+  }
+  const onClickInvite = (id) =>
+  {
+    if(invites.includes(id))setInvites(prev => prev.filter(ch => ch !== id));
+    else setInvites(prev => [...prev, id]);
+  }
 
   return (
     <div className='main'>
       {/* <Counter /> */}
       {/* <Text /> */}
-      {loading ? <p>Загрузка пользователей...</p> : <Users users={users} />}
+      <Users 
+          users={users} 
+          searchValue={searchValue} onChangeValue={onChangeValue} 
+          invites={invites} onClickInvite={onClickInvite}
+      />
     </div>
   );
 }
-
 export default App;

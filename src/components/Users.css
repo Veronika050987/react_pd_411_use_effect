@@ -1,0 +1,86 @@
+.main
+{
+    background-color: #FFF;
+    margin-top: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 2px #008080;
+    width: 400px;
+}
+.users-list
+{
+    list-style:none;
+    padding:0;
+    color: #4B0082;
+}
+.users-list img
+{
+    border-radius: 50%;
+    width:50px;
+    border-top:2px solid #444;
+}
+.users-list div
+{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.users-list li
+{
+    border-bottom: 1px solid #CCC;
+    padding: 10px;
+}
+.users-list li:last-child
+{
+    border: none;
+}
+.text
+{
+    flex-basis: 180px;
+    align-items: flex-start;
+}
+.search
+{
+    text-align: center;
+}
+.search input
+{
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    border:none;
+    border-bottom: 2px solid #008080;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #00008B;
+}
+.send-invite-btn
+{
+    width: 100%;
+    margin-top: 20px;
+    border:none;
+    border-top: 2px solid #008080;
+    padding:20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #00FA9A;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00008B;
+}
+div>.button
+{
+    text-align: center;
+}
+div>b
+{
+    font-size: 20px;
+    width: 30px;
+    border:solid 2px #E0FFFF;
+    background-color: #E0FFFF;
+    padding-bottom: 4px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px 1px #40E0D0;
+    cursor:pointer;
+}
